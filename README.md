@@ -1,6 +1,8 @@
 # Bedrock World Snapshot
 
-A utility script for creating snapshots of Minecraft Bedrock worlds, converting them to Java format and rendering beautiful images using Chunky.
+A utility script for creating snapshots of Minecraft Bedrock worlds, converting them to Java format, rendering beautiful images using Chunky, and sending them to Discord.
+
+![script_thumbnail](https://github.com/user-attachments/assets/63997db8-709b-48ed-ae8e-966a8e94b46e)
 
 ## Features
 
