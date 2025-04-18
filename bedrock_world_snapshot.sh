@@ -15,7 +15,8 @@ TEMP_DIR="./temp_world"
 SPP_TARGET="16"
 MINECRAFT_JAR_VERSION="1.21.5"
 CHUNKY_HOME_DIR="$HOME/.chunky"
-SCENE_DIR="$CHUNKY_HOME_DIR/scenes/$SCENE_NAME"
+# Scene directory will be set after parsing arguments
+SCENE_DIR=""
 CHUNKY_DOWNLOAD_URL="https://chunkyupdate.lemaik.de/ChunkyLauncher.jar"
 CHUNKER_DOWNLOAD_URL="https://github.com/HiveGamesOSS/Chunker/releases/latest/download/chunker-cli-1.7.0.jar"
 DISCORD_SH_URL="https://raw.githubusercontent.com/fieu/discord.sh/master/discord.sh"
@@ -142,6 +143,9 @@ while getopts "j:c:i:o:f:w:n:m:d:u:rbh" opt; do
     \?) echo "Invalid option: -$OPTARG" >&2; exit 1 ;;
   esac
 done
+
+# Set the scene directory based on the scene name (which might have been changed via command line)
+SCENE_DIR="$CHUNKY_HOME_DIR/scenes/$SCENE_NAME"
 
 # Check if chunker-cli JAR exists
 if [ "$CONVERT_BEDROCK_JAVA" = true ] && [ ! -f "$JAR_FILE" ]; then
@@ -377,6 +381,7 @@ if [ "$TAKE_SNAPSHOT" = true ]; then
     if [ ! -d "$SCENE_DIR" ]; then
         echo "Error: Scene directory $SCENE_DIR not found!"
         echo "Please copy the scene folder to $HOME/.chunky/scenes/"
+        echo "Make sure the scene name matches the -n parameter ($SCENE_NAME)"
         exit 1
     fi
     
