@@ -87,6 +87,42 @@ hex_to_decimal() {
     echo $((16#$hex))
 }
 
+# Function to update world path in Chunky scene file
+update_scene_world_path() {
+    local scene_file=$1
+    local world_path=$2
+    
+    echo "Updating world path in scene file to: $world_path"
+    
+    # Convert to platform-specific path format
+    if [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32" || "$OSTYPE" == "cygwin" ]]; then
+        # For Windows, use backslashes and escape them for JSON
+        world_path=$(echo "$world_path" | sed 's/\\/\\\\/g')
+    fi
+    
+    # Create a temporary file
+    local temp_file="${scene_file}.tmp"
+    
+    # Update the world path in the scene file
+    if command -v jq > /dev/null 2>&1; then
+        # Use jq if available for safer JSON manipulation
+        jq --arg path "$world_path" '.world.path = $path' "$scene_file" > "$temp_file"
+    else
+        # Fallback to sed for basic replacement
+        # This assumes the "path" field exists and has a simple format
+        sed -e 's|"path":[[:space:]]*"[^"]*"|"path": "'"$world_path"'"|g' "$scene_file" > "$temp_file"
+    fi
+    
+    # Check if the file was modified successfully
+    if [ -s "$temp_file" ]; then
+        mv "$temp_file" "$scene_file"
+        echo "Scene file updated successfully."
+    else
+        echo "Warning: Failed to update scene file. The scene may use the wrong world path."
+        rm -f "$temp_file"
+    fi
+}
+
 # Process command line arguments
 while getopts "j:c:i:o:f:w:n:m:d:u:rbh" opt; do
   case $opt in
@@ -350,6 +386,9 @@ if [ "$TAKE_SNAPSHOT" = true ]; then
         echo "Error: Scene file $SCENE_JSON not found!"
         exit 1
     fi
+    
+    # Update the world path in the scene file to point to the converted world
+    update_scene_world_path "$SCENE_JSON" "$OUTPUT_DIR"
     
     # Check for minecraft.jar
     MINECRAFT_JAR_PATH="$CHUNKY_HOME_DIR/resources/minecraft.jar"
