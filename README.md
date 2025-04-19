@@ -1,5 +1,13 @@
 # Bedrock World Snapshot
 
+<p>
+  <img alt="GitHub Release" src="https://img.shields.io/github/v/release/ATOMIC09/bedrock-snapshot">
+  <img alt="GitHub License" src="https://img.shields.io/github/license/ATOMIC09/bedrock-snapshot">
+  <a href="https://github.com/ATOMIC09/chunky-timelapse/tags">
+      <img alt="Download" src="https://img.shields.io/github/downloads/ATOMIC09/chunky-timelapse/total" />
+  </a>
+</p>
+
 A utility script for creating snapshots of Minecraft Bedrock worlds, converting them to Java format, rendering beautiful images using Chunky, and sending them to Discord.
 
 ![script_thumbnail](https://github.com/user-attachments/assets/63997db8-709b-48ed-ae8e-966a8e94b46e)
