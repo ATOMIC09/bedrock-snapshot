@@ -3,8 +3,8 @@
 <p>
   <img alt="GitHub Release" src="https://img.shields.io/github/v/release/ATOMIC09/bedrock-snapshot">
   <img alt="GitHub License" src="https://img.shields.io/github/license/ATOMIC09/bedrock-snapshot">
-  <a href="https://github.com/ATOMIC09/chunky-timelapse/tags">
-      <img alt="Download" src="https://img.shields.io/github/downloads/ATOMIC09/chunky-timelapse/total" />
+  <a href="https://github.com/ATOMIC09/bedrock-snapshot/tags">
+      <img alt="Download" src="https://img.shields.io/github/downloads/ATOMIC09/bedrock-snapshot/total" />
   </a>
 </p>
 
